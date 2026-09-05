@@ -1,1 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#071014">
+
+    <title>HORMUZ WAR</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- =========================
+         MAIN MENU
+    ========================== -->
+
+    <section id="screen-menu" class="screen active">
+
+        <div class="background-grid"></div>
+
+        <div class="menu-container">
+
+            <div class="prototype-label">
+                TACTICAL BATTLE • PROTOTYPE v0.1
+            </div>
+
+            <h1>
+                HORMUZ
+                <span>WAR</span>
+            </h1>
+
+            <div class="subtitle">
+                SKILL • TACTICS • RESOURCE MANAGEMENT
+            </div>
+
+            <div class="menu-buttons">
+
+                <button
+                    class="primary-button"
+                    data-action="modes"
+                >
+                    PLAY
+                </button>
+
+                <button
+                    class="menu-button"
+                    data-action="howto"
+                >
+                    HOW TO PLAY
+                </button>
+
+                <button
+                    class="menu-button"
+                    data-action="settings"
+                >
+                    SETTINGS
+                </button>
+
+            </div>
+
+            <div class="version">
+                MOBILE-FIRST WEB GAME
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GAME MODE
+    ========================== -->
+
+    <section id="screen-modes" class="screen">
+
+        <div class="screen-title">
+            SELECT GAME MODE
+        </div>
+
+        <div class="mode-container">
+
+            <!-- DUEL -->
+
+            <article class="mode-card active-mode">
+
+                <div class="mode-status">
+                    ACTIVE
+                </div>
+
+                <div class="mode-icon">
+                    ⚔
+                </div>
+
+                <h2>
+                    DUEL
+                </h2>
+
+                <h3>
+                    TACTICAL BATTLE
+                </h3>
+
+                <p>
+                    Turn-based tactical combat between two opposing forces.
+                </p>
+
+                <div class="mode-features">
+                    <span>● MULTI-UNIT</span>
+                    <span>● TURN BASED</span>
+                    <span>● SCORE SYSTEM</span>
+                </div>
+
+                <button
+                    class="primary-button"
+                    data-action="factions"
+                >
+                    PLAY DUEL
+                </button>
+
+            </article>
+
+
+            <!-- ESCORT -->
+
+            <article class="mode-card locked-mode">
+
+                <div class="mode-status">
+                    LOCKED
+                </div>
+
+                <div class="mode-icon">
+                    ◈
+                </div>
+
+                <h2>
+                    ESCORT
+                </h2>
+
+                <h3>
+                    PROTECT THE TANKER
+                </h3>
+
+                <p>
+                    Protect the tanker while moving through a dangerous route.
+                </p>
+
+                <div class="coming-soon">
+                    COMING SOON
+                </div>
+
+            </article>
+
+
+            <!-- DEFENSE -->
+
+            <article class="mode-card locked-mode">
+
+                <div class="mode-status">
+                    LOCKED
+                </div>
+
+                <div class="mode-icon">
+                    ⛨
+                </div>
+
+                <h2>
+                    DEFENSE
+                </h2>
+
+                <h3>
+                    DEFEND YOUR BASE
+                </h3>
+
+                <p>
+                    Defend your installation against multiple enemy waves.
+                </p>
+
+                <div class="coming-soon">
+                    COMING SOON
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <button
+            class="back-button"
+            data-action="menu"
+        >
+            ← BACK
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         FACTION SELECT
+    ========================== -->
+
+    <section id="screen-factions" class="screen">
+
+        <div class="screen-title">
+            SELECT YOUR FORCE
+        </div>
+
+        <div class="faction-container">
+
+            <!-- NORTHERN -->
+
+            <article
+                class="faction-card northern"
+                data-faction="north"
+            >
+
+                <div class="faction-symbol">
+                    N
+                </div>
+
+                <div class="faction-color">
+                    NORTHERN FORCES
+                </div>
+
+                <h2>
+                    AGGRESSIVE / FAST
+                </h2>
+
+                <p>
+                    High pressure and mobility.
+                    Designed for players who like to take initiative.
+                </p>
+
+                <div class="faction-stat">
+                    <span>MOBILITY</span>
+                    <div class="stat-bar">
+                        <i style="width:90%"></i>
+                    </div>
+                </div>
+
+                <div class="faction-stat">
+                    <span>PRESSURE</span>
+                    <div class="stat-bar">
+                        <i style="width:85%"></i>
+                    </div>
+                </div>
+
+            </article>
+
+
+            <!-- SOUTHERN -->
+
+            <article
+                class="faction-card southern"
+                data-faction="south"
+            >
+
+                <div class="faction-symbol">
+                    S
+                </div>
+
+                <div class="faction-color">
+                    SOUTHERN FORCES
+                </div>
+
+                <h2>
+                    PRECISION / CONTROL
+                </h2>
+
+                <p>
+                    Precision and battlefield control.
+                    Designed for players who prefer tactical planning.
+                </p>
+
+                <div class="faction-stat">
+                    <span>PRECISION</span>
+                    <div class="stat-bar">
+                        <i style="width:92%"></i>
+                    </div>
+                </div>
+
+                <div class="faction-stat">
+                    <span>CONTROL</span>
+                    <div class="stat-bar">
+                        <i style="width:88%"></i>
+                    </div>
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <div class="screen-actions">
+
+            <button
+                class="back-button"
+                data-action="modes"
+            >
+                ← BACK
+            </button>
+
+            <button
+                id="continueFaction"
+                class="primary-button"
+                disabled
+            >
+                CONTINUE →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LOADOUT
+    ========================== -->
+
+    <section id="screen-loadout" class="screen">
+
+        <div class="screen-title">
+            LOADOUT
+            <span>SELECT 6 SYSTEMS</span>
+        </div>
+
+
+        <div class="loadout-container">
+
+            <!-- AVAILABLE SYSTEMS -->
+
+            <div class="loadout-panel">
+
+                <div class="panel-title">
+                    AVAILABLE SYSTEMS
+                </div>
+
+                <div id="arsenalList">
+
+                    <!-- Filled by JavaScript -->
+
+                </div>
+
+            </div>
+
+
+            <!-- PLAYER LOADOUT -->
+
+            <div class="loadout-panel">
+
+                <div class="panel-title">
+
+                    YOUR LOADOUT
+
+                    <span id="slotCount">
+                        0 / 6
+                    </span>
+
+                </div>
+
+                <div id="loadoutSlots">
+
+                    <!-- Filled by JavaScript -->
+
+                </div>
+
+
+                <div
+                    id="systemInfo"
+                    class="system-info"
+                >
+
+                    Select a system to inspect it.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="screen-actions">
+
+            <button
+                class="back-button"
+                data-action="factions"
+            >
+                ← BACK
+            </button>
+
+            <button
+                id="readyBtn"
+                class="primary-button"
+                disabled
+            >
+                READY →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BATTLE SCREEN
+    ========================== -->
+
+    <section
+        id="screen-game"
+        class="screen game-screen"
+    >
+
+        <!-- TOP HUD -->
+
+        <header class="game-hud">
+
+            <div class="hud-side northern-hud">
+
+                <strong>
+                    🔴 NORTHERN
+                </strong>
+
+                <span id="northScore">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="hud-center">
+
+                <strong id="turnLabel">
+                    TURN 1 / 20
+                </strong>
+
+                <span id="phaseLabel">
+                    PLANNING
+                </span>
+
+            </div>
+
+
+            <div class="hud-side southern-hud">
+
+                <strong>
+                    🔵 SOUTHERN
+                </strong>
+
+                <span id="southScore">
+                    0
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- GAME AREA -->
+
+        <div class="game-area">
+
+
+            <!-- BATTLEFIELD -->
+
+            <div
+                id="battlefield"
+                class="battlefield"
+            >
+
+                <div class="sky"></div>
+
+                <div class="cloud cloud-one"></div>
+                <div class="cloud cloud-two"></div>
+
+                <div class="sea"></div>
+
+                <div class="island island-one"></div>
+                <div class="island island-two"></div>
+
+                <div class="shore shore-left"></div>
+                <div class="shore shore-right"></div>
+
+
+                <!-- UNITS -->
+
+                <div id="unitsLayer"></div>
+
+
+                <!-- PROJECTILES -->
+
+                <div id="projectiles"></div>
+
+
+                <!-- EFFECTS -->
+
+                <div id="effects"></div>
+
+
+                <!-- TARGET RETICLE -->
+
+                <div
+                    id="reticle"
+                    class="target-reticle"
+                ></div>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="toast"
+                    class="toast"
+                ></div>
+
+            </div>
+
+
+            <!-- TARGET STATUS -->
+
+            <aside class="target-panel">
+
+                <div class="panel-title">
+                    TARGET / UNIT STATUS
+                </div>
+
+                <div id="targetInfo">
+
+                    Select a unit on the battlefield.
+
+                </div>
+
+            </aside>
+
+
+            <!-- CONTROL PANEL -->
+
+            <div class="control-panel">
+
+                <div class="control-header">
+
+                    <span>
+                        LOADOUT
+                    </span>
+
+                    <span id="actionHint">
+                        SELECT A UNIT
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="battleLoadout"
+                    class="battle-loadout"
+                >
+
+                    <!-- Filled by JavaScript -->
+
+                </div>
+
+
+                <div class="aim-controls">
+
+                    <label>
+
+                        ANGLE
+
+                        <output id="angleOut">
+                            45°
+                        </output>
+
+                        <input
+                            id="angle"
+                            type="range"
+                            min="10"
+                            max="80"
+                            value="45"
+                        >
+
+                    </label>
+
+
+                    <label>
+
+                        POWER
+
+                        <output id="powerOut">
+                            70%
+                        </output>
+
+                        <input
+                            id="power"
+                            type="range"
+                            min="20"
+                            max="100"
+                            value="70"
+                        >
+
+                    </label>
+
+
+                    <button
+                        id="fireBtn"
+                        class="fire-button"
+                        disabled
+                    >
+                        FIRE
+                    </button>
+
+
+                    <button
+                        id="endTurnBtn"
+                        class="end-turn-button"
+                    >
+                        END TURN
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         INFORMATION MODAL
+    ========================== -->
+
+    <div
+        id="modal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <button
+                id="modalClose"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+            <div id="modalBody"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GAME JAVASCRIPT -->
+
+<script src="game.js"></script>
+
+</body>
+</html>
