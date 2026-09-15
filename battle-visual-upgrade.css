@@ -1,0 +1,76 @@
+/* HORMUZ WAR — visual battlefield + weapon control upgrade */
+
+/* Battlefield: cinematic playable area */
+#screen-game .game-area{grid-template-columns:minmax(0,1fr) 270px!important;grid-template-rows:minmax(0,1fr) 215px!important;gap:10px!important;padding:10px!important}
+#screen-game .battlefield{grid-column:1;grid-row:1;min-height:0!important;border-radius:8px!important;background:#06151b!important;box-shadow:inset 0 0 90px #000b,0 12px 35px #0009!important}
+#screen-game .target-panel{grid-column:2;grid-row:1;min-width:0;overflow:auto!important}
+#screen-game .control-panel{grid-column:1;grid-row:2;min-width:0;min-height:0!important;overflow:hidden!important;display:grid!important;grid-template-rows:1fr auto!important;gap:8px!important;padding:10px!important;background:linear-gradient(180deg,#101b21,#071014)!important;border:1px solid #314952!important;border-radius:8px!important;box-shadow:0 8px 24px #0009!important}
+
+/* Weapon strip */
+#screen-game .battle-loadout{display:grid!important;grid-template-columns:repeat(10,minmax(72px,1fr))!important;gap:7px!important;min-height:0!important;overflow:hidden!important;align-items:stretch!important}
+#screen-game .battle-slot{position:relative!important;min-width:0!important;height:100%!important;margin:0!important;padding:7px 4px 5px!important;border:1px solid #334b54!important;border-radius:6px!important;background:linear-gradient(180deg,#14252d,#0a151a)!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;cursor:pointer!important;box-shadow:inset 0 1px #ffffff0d!important;transform:none!important}
+#screen-game .battle-slot:hover:not(:disabled){border-color:#93aab1!important;background:linear-gradient(180deg,#1b3039,#0b171d)!important;transform:translateY(-2px)!important}
+#screen-game .battle-slot.selected{border-color:#f1c957!important;box-shadow:0 0 16px #f1c95735,inset 0 0 20px #f1c9570b!important;background:linear-gradient(180deg,#2a281b,#111817)!important}
+#screen-game .battle-slot.used{opacity:.35!important;filter:grayscale(1)!important}
+#screen-game .battle-slot .weapon-icon{width:52px;height:52px;display:grid;place-items:center;font-size:31px;line-height:1;border-radius:50%;border:1px solid #51666d;background:radial-gradient(circle,#243c45,#0a151a 70%);box-shadow:0 0 14px #0008,inset 0 1px #fff2;color:#dfecef;text-shadow:0 2px 7px #000;flex:none}
+#screen-game .battle-slot.selected .weapon-icon{border-color:#f1c957;box-shadow:0 0 15px #f1c95745,inset 0 1px #fff3}
+#screen-game .battle-slot .weapon-name{display:block;width:100%;font-size:8px!important;line-height:1.1!important;font-weight:900!important;letter-spacing:.35px!important;text-align:center!important;white-space:normal!important;color:#e6eef0!important;min-height:18px}
+#screen-game .battle-slot .weapon-role{font-size:7px!important;color:#789099!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#screen-game .battle-slot .weapon-ammo{font-size:8px!important;font-weight:900!important;color:#f0c95a!important}
+
+/* Make the action row impossible to miss */
+#screen-game .selected-system-info{display:none!important}
+#screen-game .aim-controls{display:grid!important;grid-template-columns:170px 170px minmax(82px,110px) minmax(150px,190px) minmax(120px,160px)!important;align-items:center!important;gap:9px!important;min-height:52px!important}
+#screen-game .aim-controls label{background:#0a161b!important;border:1px solid #253b43!important;border-radius:5px!important;padding:7px 9px!important;color:#a9b9bd!important;font-size:9px!important;letter-spacing:1px!important}
+#screen-game .aim-controls input{width:100%!important;accent-color:#d5b14d!important;margin-top:7px!important}
+#screen-game .fire-button{display:block!important;height:50px!important;background:linear-gradient(180deg,#b82f38,#65171d)!important;border:2px solid #ef646d!important;color:#fff!important;font-size:18px!important;font-weight:1000!important;letter-spacing:4px!important;border-radius:6px!important;box-shadow:0 0 18px #c83e4638,inset 0 1px #fff4!important;opacity:1!important}
+#screen-game .fire-button:disabled{opacity:.32!important;background:#331a1d!important;border-color:#70363b!important;box-shadow:none!important}
+#screen-game .fire-button:not(:disabled){animation:firePulse 1.8s ease-in-out infinite}
+@keyframes firePulse{0%,100%{box-shadow:0 0 12px #c83e4630,inset 0 1px #fff4}50%{box-shadow:0 0 28px #ff505966,inset 0 1px #fff7}}
+#screen-game .move-button{height:50px!important;background:linear-gradient(180deg,#284e5c,#142b34)!important;border-color:#4c8796!important;font-weight:900!important;letter-spacing:1px!important}
+#screen-game .end-turn-button{height:50px!important;background:linear-gradient(180deg,#5b4a1e,#30270e)!important;border-color:#a88a3d!important;font-weight:900!important;letter-spacing:1px!important}
+
+/* Detailed unit art */
+#unitsLayer>div{width:112px!important;height:64px!important;background:transparent!important;border:0!important;box-shadow:none!important;filter:drop-shadow(0 10px 7px #000c)!important;overflow:visible!important}
+#unitsLayer>div:before,#unitsLayer>div:after{display:none!important}
+#unitsLayer .body{position:absolute!important;inset:0!important}
+#unitsLayer .unit-hull{position:absolute;left:8%;right:8%;bottom:17%;height:35%;background:linear-gradient(180deg,#5f7377,#172327 70%);border:2px solid #a9b8ba;border-radius:6px 13px 5px 8px;box-shadow:inset 0 3px #fff2,0 3px 0 #0008}
+#unitsLayer .unit-turret{position:absolute;left:39%;bottom:45%;width:27%;height:20%;background:#405458;border:2px solid #a1b0b2;border-radius:4px;box-shadow:inset 0 2px #fff2}
+#unitsLayer .unit-barrel{position:absolute;left:58%;bottom:52%;width:34%;height:7%;background:#172225;border:1px solid #93a4a7;border-radius:3px;transform:rotate(-4deg);transform-origin:left center}
+#unitsLayer .unit-super{position:absolute;left:30%;bottom:57%;width:40%;height:13%;background:#25383c;border:1px solid #7f9498;border-radius:4px}
+#unitsLayer .unit-radar{position:absolute;left:43%;bottom:49%;width:17%;height:25%;border:3px solid #76dbe2;border-radius:50%;box-shadow:0 0 12px #55d8df77}
+#unitsLayer .unit-radar:after{content:"";position:absolute;left:45%;top:-55%;width:3px;height:70%;background:#7ee4e9;transform:rotate(32deg);transform-origin:bottom}
+#unitsLayer .unit-turret-radar{position:absolute;left:35%;bottom:43%;width:32%;height:28%;border:2px solid #d6ba61;border-radius:50%;box-shadow:0 0 10px #e6bd4c44}
+#unitsLayer .unit-turret-radar:after{content:"";position:absolute;left:48%;top:-55%;width:3px;height:70%;background:#f0cf6b;transform:rotate(-28deg);transform-origin:bottom}
+#unitsLayer .unit-glow{position:absolute;left:6%;right:6%;bottom:2%;height:7px;border-radius:50%;background:#61c6d855;filter:blur(5px)}
+#unitsLayer>div.northern .unit-hull{background:linear-gradient(180deg,#a94b51,#35191d 72%);border-color:#ef747a}
+#unitsLayer>div.southern .unit-hull{background:linear-gradient(180deg,#477fb8,#142c48 72%);border-color:#79b5f2}
+#unitsLayer>div.northern .unit-turret,#unitsLayer>div.northern .unit-super{border-color:#d96b72;background:#54262b}
+#unitsLayer>div.southern .unit-turret,#unitsLayer>div.southern .unit-super{border-color:#6fa5d8;background:#244866}
+#unitsLayer>div.northern .unit-glow{background:#e0475055}
+#unitsLayer>div.southern .unit-glow{background:#4b9be055}
+#unitsLayer .hpbar{left:7%;right:7%;top:-4px;height:6px!important;border-radius:4px;overflow:hidden;background:#05090a!important}
+#unitsLayer .unit-label{top:67px!important;font-size:8px!important;letter-spacing:1.1px!important;padding:2px 6px;background:#05090acc;border:1px solid #52676d;border-radius:3px}
+#unitsLayer>div.selected{outline:2px solid #f4d06a!important;outline-offset:5px!important;filter:drop-shadow(0 0 14px #f4d06a88)!important}
+#unitsLayer>div.destroyed{opacity:.22;filter:grayscale(1)!important}
+
+/* Projectile polish */
+#projectiles .projectile{width:14px!important;height:14px!important;border-radius:50%!important;background:#ffd46a!important;box-shadow:0 0 10px #fff,0 0 25px #ff7a28,0 0 45px #ff4d1f!important}
+
+@media(max-width:1100px){
+  #screen-game .game-area{grid-template-columns:minmax(0,1fr) 220px!important;grid-template-rows:minmax(0,1fr) 205px!important}
+  #screen-game .battle-loadout{grid-template-columns:repeat(5,minmax(70px,1fr))!important;overflow-y:auto!important}
+  #screen-game .aim-controls{grid-template-columns:1fr 1fr 90px 1.2fr 1fr!important}
+}
+@media(max-width:800px){
+  #screen-game .game-area{grid-template-columns:1fr!important;grid-template-rows:minmax(300px,1fr) 135px 190px!important;overflow:auto!important}
+  #screen-game .battlefield{grid-column:1;grid-row:1}
+  #screen-game .target-panel{grid-column:1;grid-row:2}
+  #screen-game .control-panel{grid-column:1;grid-row:3}
+  #screen-game .battle-loadout{grid-template-columns:repeat(5,1fr)!important;overflow:hidden!important}
+  #screen-game .battle-slot .weapon-icon{width:35px;height:35px;font-size:21px}
+  #screen-game .battle-slot .weapon-name{font-size:7px!important}
+  #screen-game .aim-controls{grid-template-columns:1fr 1fr 70px 1.4fr 1fr!important;gap:4px!important}
+  #unitsLayer>div{width:88px!important;height:52px!important}
+  #unitsLayer .unit-label{top:54px!important}
+}
