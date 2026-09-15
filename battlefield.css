@@ -1,58 +1,30 @@
-/* HORMUZ WAR v0.7 — Battlefield visual and layout stabilization */
-.battlefield{isolation:isolate;background:#06151b!important;perspective:900px;min-height:320px;height:100%;width:100%}
-.battlefield .sky{background:linear-gradient(180deg,#071017 0%,#102b34 58%,#173b43 100%)!important}
-.battlefield .sea{background:linear-gradient(180deg,#0a3b45 0%,#062731 48%,#041820 100%)!important;overflow:hidden}
-.battlefield .sea:before,.battlefield .sea:after{content:"";position:absolute;left:-10%;width:120%;height:32px;border-top:1px solid #77c3ce33;border-radius:50%;transform:rotate(-2deg);animation:seaDrift 9s linear infinite}
-.battlefield .sea:before{top:17%;box-shadow:0 18px 0 #6aaeb822,0 38px 0 #6aaeb818,0 58px 0 #6aaeb812}
-.battlefield .sea:after{top:63%;opacity:.45;animation-duration:13s}
-@keyframes seaDrift{from{transform:translateX(-3%) rotate(-2deg)}to{transform:translateX(3%) rotate(-2deg)}}
-.battlefield .sun{width:125px;height:125px;right:16%;top:8%;background:radial-gradient(circle,#ffe5a65c 0,#d9b96b22 32%,transparent 70%);filter:blur(5px)}
-.battlefield .cloud{opacity:.65;filter:blur(12px);background:#c3d7d933}
-.battlefield .horizon{top:43%;height:5px;background:#9ac4c733;box-shadow:0 0 35px #8dc5ce2c}
-.battlefield .island{z-index:3;filter:drop-shadow(0 -8px 14px #0008)}
-.battlefield .island-one{background:linear-gradient(160deg,#263e34,#0b1c1c);border-top-color:#59775d}
-.battlefield .island-two{background:linear-gradient(160deg,#22392f,#091a1b);border-top-color:#4e6e58}
-.distant-fleet{position:absolute;z-index:2;width:125px;height:30px;opacity:.5;filter:blur(.3px)}
-.distant-fleet span{position:absolute;bottom:5px;width:68px;height:9px;background:#061014;border-radius:2px 7px 3px 4px;box-shadow:0 4px 0 #020607}
-.distant-fleet span:before{content:"";position:absolute;left:25px;bottom:8px;width:18px;height:12px;background:#08171b;clip-path:polygon(0 100%,18% 20%,55% 20%,70% 0,100% 100%)}
-.distant-fleet span:nth-child(2){transform:scale(.55);right:0;bottom:8px}
-.fleet-north{left:19%;top:40%;transform:scale(.7);opacity:.35}.fleet-south{right:20%;top:42%;transform:scale(.55);opacity:.32}
-.fleet-north span{background:#160b0d}.fleet-south span{background:#071323}
-.sea-foam{position:absolute;z-index:4;width:150px;height:18px;border-top:2px solid #b9e1df22;border-radius:50%;filter:blur(.5px)}
-.foam-a{left:18%;bottom:23%;transform:rotate(-4deg)}.foam-b{right:15%;bottom:28%;transform:rotate(3deg)}
-.shore-defense{position:absolute;z-index:4;width:55px;height:22px;background:#0a1315;border:1px solid #4d6263;bottom:29%;box-shadow:0 6px 15px #0009}
-.shore-defense:before{content:"";position:absolute;left:9px;top:-13px;width:36px;height:15px;background:#111d1d;clip-path:polygon(0 100%,28% 55%,40% 0,52% 0,64% 55%,100% 100%)}
-.defense-a{left:9%}.defense-b{right:11%}
-.battle-scan{position:absolute;inset:0;z-index:40;pointer-events:none;background:linear-gradient(90deg,transparent 0%,#8fcad20a 48%,transparent 52%);mix-blend-mode:screen;animation:scanSweep 7s ease-in-out infinite}
-@keyframes scanSweep{0%,100%{transform:translateX(-35%);opacity:.2}50%{transform:translateX(35%);opacity:.5}}
-
-/* Make the game screen and its battlefield consume the actual viewport. */
-#screen-game.game-screen{height:100vh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding:0!important}
-#screen-game .game-area{flex:1 1 auto!important;height:auto!important;min-height:0!important;display:grid!important}
-#screen-game .battlefield{min-height:0!important}
-
-#unitsLayer{position:absolute;inset:0;z-index:15;pointer-events:none}
-#unitsLayer>div{position:absolute;z-index:2;width:76px!important;height:42px!important;min-width:76px;border-radius:8px!important;border:1px solid #7f969b!important;background:linear-gradient(180deg,#34474b,#101b1e)!important;box-shadow:0 10px 18px #000b,0 0 0 1px #0008,inset 0 2px 0 #ffffff14!important;color:transparent!important;font-size:0!important;filter:drop-shadow(0 5px 5px #0009);transform:translate(-50%,-50%);transform-origin:center bottom;pointer-events:auto;cursor:pointer}
-#unitsLayer>div:before{content:"";position:absolute;left:8px;right:8px;bottom:5px;height:9px;background:#071012;border-radius:2px 7px 3px 3px;box-shadow:inset 0 2px #63777a55}
-#unitsLayer>div:after{content:"";position:absolute;left:31px;top:-12px;width:25px;height:18px;background:#26373a;border:1px solid #6b7d7f;clip-path:polygon(0 100%,12% 35%,48% 35%,58% 0,100% 100%);box-shadow:10px 7px 0 -7px #9aaeb055}
-#unitsLayer>div:nth-child(-n+4){border-color:#d24d54!important;background:linear-gradient(180deg,#633238,#171517)!important}
-#unitsLayer>div:nth-child(n+5){border-color:#4e8bd0!important;background:linear-gradient(180deg,#315679,#101a23)!important}
-#unitsLayer>div:nth-child(2):before,#unitsLayer>div:nth-child(6):before{left:12px;right:12px;height:6px;border-radius:50%}
-#unitsLayer>div:nth-child(2):after,#unitsLayer>div:nth-child(6):after{left:24px;width:34px;height:13px;clip-path:polygon(0 100%,35% 15%,60% 15%,100% 100%)}
-#unitsLayer>div:nth-child(3):before,#unitsLayer>div:nth-child(7):before{left:19px;right:19px;height:15px;border-radius:3px}
-#unitsLayer>div:nth-child(3):after,#unitsLayer>div:nth-child(7):after{left:34px;width:18px;height:22px;top:-15px;clip-path:polygon(20% 100%,30% 25%,70% 25%,80% 100%)}
-#unitsLayer>div:nth-child(4):before,#unitsLayer>div:nth-child(8):before{left:4px;right:4px;height:12px;transform:skewX(-10deg)}
-#unitsLayer>div:nth-child(4):after,#unitsLayer>div:nth-child(8):after{left:28px;width:32px;height:14px}
-
-/* Dedicated type emblems inside each platform. */
-#unitsLayer>div.ship .body:before{content:"⚓";position:absolute;left:50%;top:7px;transform:translateX(-50%);font-size:17px;color:#e5eef0;opacity:.85}
-#unitsLayer>div.boat .body:before{content:"➤";position:absolute;left:50%;top:6px;transform:translateX(-50%);font-size:20px;color:#e5eef0;opacity:.9}
-#unitsLayer>div.radar .body:before{content:"◉";position:absolute;left:50%;top:5px;transform:translateX(-50%);font-size:19px;color:#72d8df;opacity:.9}
-#unitsLayer>div.defense .body:before{content:"⌾";position:absolute;left:50%;top:5px;transform:translateX(-50%);font-size:20px;color:#ffd36a;opacity:.9}
-#unitsLayer .body{position:absolute;inset:0;pointer-events:none}
-#unitsLayer .hpbar{position:absolute;left:7px;right:7px;top:-8px;height:4px;background:#080d0f;border:1px solid #27363a;z-index:5}
-#unitsLayer .hpbar i{display:block;height:100%;background:#67d58b}
-#unitsLayer .unit-label{position:absolute;top:46px;left:50%;transform:translateX(-50%);white-space:nowrap;color:#e8f0f2!important;font-size:7px!important;font-weight:800;letter-spacing:1px;text-shadow:0 2px 5px #000;z-index:6}
-#unitsLayer>div.selected,#unitsLayer>div.active,#unitsLayer>div.targeted{outline:2px solid #f1cf63;outline-offset:4px;filter:drop-shadow(0 0 10px #f1cf6355) drop-shadow(0 6px 6px #000b)}
-#projectiles{z-index:22;position:absolute;inset:0;pointer-events:none}#effects{z-index:25;position:absolute;inset:0;pointer-events:none}
-@media(max-width:800px){#unitsLayer>div{width:62px!important;height:36px!important;min-width:62px}.distant-fleet{transform:scale(.55)}.shore-defense{transform:scale(.7)}#unitsLayer .unit-label{font-size:6px!important}}
+/* HORMUZ WAR — mobile scroll/layout fix */
+html,body{overflow-x:hidden!important;overflow-y:auto!important;min-height:100%!important;height:auto!important}
+#app{min-height:100dvh!important;height:auto!important;overflow:visible!important}
+.screen{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+#screen-game.game-screen{display:block!important;height:auto!important;min-height:100dvh!important;overflow:visible!important;padding:0!important}
+#screen-game .game-hud{position:relative!important;height:66px!important}
+#screen-game .game-area{height:auto!important;min-height:0!important;display:flex!important;flex-direction:column!important;overflow:visible!important;padding:8px!important}
+#screen-game .battlefield{order:1;width:100%!important;height:58dvh!important;min-height:360px!important;max-height:none!important;flex:none!important;overflow:hidden!important}
+#screen-game #targetPanel{order:2;width:100%!important;min-height:90px!important;max-height:none!important;overflow:visible!important}
+#screen-game .control-panel{order:3;width:100%!important;height:auto!important;min-height:260px!important;overflow:visible!important}
+#screen-game .battle-loadout{overflow-x:auto!important;overflow-y:hidden!important;display:flex!important;flex-wrap:nowrap!important;gap:7px!important;padding-bottom:8px!important;-webkit-overflow-scrolling:touch!important}
+#screen-game .battle-slot{flex:0 0 112px!important;min-height:96px!important}
+#screen-game .aim-controls{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+#screen-game .aim-controls label{min-width:0!important}
+#screen-game #moveButton,#screen-game #fireButton,#screen-game #endTurnButton{min-height:52px!important;width:100%!important}
+#screen-game #fireButton{display:block!important;visibility:visible!important;opacity:1!important}
+#screen-game .selected-system-info{min-height:65px!important}
+@media(max-width:600px){
+  #screen-game .game-hud{height:58px!important;padding:0 7px!important;grid-template-columns:1fr 82px 1fr!important;gap:3px!important}
+  #screen-game .hud-side{font-size:8px!important;gap:4px!important}
+  #screen-game .hud-side small{font-size:5px!important}
+  #screen-game .hud-side strong{font-size:14px!important}
+  #screen-game .mini-emblem{width:26px!important;height:26px!important}
+  #screen-game .hud-center small{font-size:5px!important}
+  #screen-game .hud-center b{font-size:8px!important}
+  #screen-game .hud-center span{font-size:6px!important}
+  #screen-game .battlefield{height:55dvh!important;min-height:330px!important}
+  #screen-game .control-panel{padding:8px!important}
+  #screen-game .battle-slot{flex-basis:104px!important;min-height:88px!important}
+}
