@@ -1,4 +1,4 @@
-/* HORMUZ WAR v0.2 UI compatibility layer */
+/* HORMUZ WAR v0.6 UI compatibility layer */
 (function(){
   function show(id){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -18,14 +18,15 @@
   function refreshActions(){
     const ready=document.getElementById('readyBtn');
     const selected=document.querySelectorAll('#arsenalList .system-card.selected').length;
-    if(ready) ready.disabled=selected!==5;
+    if(ready) ready.disabled=selected!==10;
 
     const fire=document.getElementById('fireButton');
-    if(fire){
-      const system=document.querySelector('#battleLoadout .battle-system.selected');
-      const target=document.getElementById('targetInfo');
-      const hasTarget=target && !/select a unit/i.test(target.textContent||'');
-      fire.disabled=!(system && hasTarget);
+    if(fire && typeof state!=='undefined'){
+      const system=document.querySelector('#battleLoadout .battle-slot.selected');
+      const hasTarget=!!state.target && state.target.hp>0 && state.target.side!==state.playerSide;
+      const hasUnit=!!state.selectedUnit && state.selectedUnit.side===state.playerSide && state.selectedUnit.hp>0;
+      const usable=state.phase==='PLANNING' && !state.turnSpent;
+      fire.disabled=!(system && hasTarget && hasUnit && usable);
     }
   }
 
