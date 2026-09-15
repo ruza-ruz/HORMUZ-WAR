@@ -1,64 +1,108 @@
 /* HORMUZ WAR — expanded arsenal / 10-system loadout */
+#screen-loadout .loadout-container{align-items:stretch}
+#screen-loadout .loadout-panel{min-width:0;border-radius:8px;overflow:hidden}
 
-#screen-loadout .loadout-container {
-  align-items: stretch;
+/* The two tactical workspaces are deliberately different. */
+#screen-loadout .loadout-panel:first-child{
+  background:linear-gradient(145deg,#101b22,#071116);
+  border:1px solid #3b5963;
+  box-shadow:inset 0 0 0 1px #0b252e,0 18px 45px #0007;
+}
+#screen-loadout .selected-panel{
+  background:linear-gradient(145deg,#17180f,#0d110c);
+  border:1px solid #746331;
+  box-shadow:inset 0 0 0 1px #302914,0 18px 45px #0007;
+}
+#screen-loadout .loadout-panel:first-child .panel-heading span{color:#9ec4d0}
+#screen-loadout .selected-panel .panel-heading span{color:#e1c56a}
+
+#screen-loadout #arsenalList{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+  max-height:52vh;overflow-y:auto;padding:2px 4px 8px 2px;
+}
+#screen-loadout .system-card{
+  min-height:72px;cursor:pointer;position:relative;
+  background:linear-gradient(145deg,#0d1b21,#091217);
+  border:1px solid #28424c;border-radius:6px;
+  transition:.16s ease;
+}
+#screen-loadout .system-card:hover{border-color:#6c8b96;transform:translateY(-1px)}
+#screen-loadout .system-card.selected{
+  border-color:#d5b64f;background:linear-gradient(145deg,#1c2117,#10150f);
+  box-shadow:inset 3px 0 #d5b64f,0 0 15px #d5b64f12;
 }
 
-#screen-loadout .loadout-panel {
-  min-width: 0;
+/* Every system gets its own visual identity while keeping the compact UI. */
+#screen-loadout .sys-icon{
+  width:38px;height:38px;border-radius:8px;font-size:18px;font-weight:900;
+  background:radial-gradient(circle at 35% 30%,#304b55,#111c21 72%);
+  border:1px solid #49626a;color:#dcecef;
+  box-shadow:inset 0 0 12px #0008,0 0 8px #0006;
+}
+#screen-loadout .system-card[data-system="basicMissile"] .sys-icon{color:#ffca62}
+#screen-loadout .system-card[data-system="heavyMissile"] .sys-icon{color:#ff6868}
+#screen-loadout .system-card[data-system="precision"] .sys-icon{color:#72b8ff}
+#screen-loadout .system-card[data-system="longRange"] .sys-icon{color:#9bc8ff}
+#screen-loadout .system-card[data-system="interceptor"] .sys-icon,
+#screen-loadout .system-card[data-system="rapidDefense"] .sys-icon,
+#screen-loadout .system-card[data-system="pointDefense"] .sys-icon{color:#7dffb2}
+#screen-loadout .system-card[data-system="recon"] .sys-icon,
+#screen-loadout .system-card[data-system="sonarSweep"] .sys-icon,
+#screen-loadout .system-card[data-system="sensorDrone"] .sys-icon{color:#68d8df}
+#screen-loadout .system-card[data-system="jammer"] .sys-icon,
+#screen-loadout .system-card[data-system="counterJammer"] .sys-icon,
+#screen-loadout .system-card[data-system="empPulse"] .sys-icon{color:#c08cff}
+#screen-loadout .system-card[data-system="repair"] .sys-icon{color:#79f0a0}
+#screen-loadout .system-card[data-system="shield"] .sys-icon,
+#screen-loadout .system-card[data-system="smokeScreen"] .sys-icon{color:#b8c7ce}
+#screen-loadout .system-card[data-system="clusterMissile"] .sys-icon,
+#screen-loadout .system-card[data-system="saturationMissile"] .sys-icon,
+#screen-loadout .system-card[data-system="barrageRocket"] .sys-icon{color:#ff925f}
+#screen-loadout .system-card[data-system="seaMine"] .sys-icon{color:#e3d27b}
+#screen-loadout .system-card[data-system="decoyDrone"] .sys-icon{color:#e58cff}
+#screen-loadout .system-card[data-system="stealthDrone"] .sys-icon{color:#9aa9ff}
+#screen-loadout .system-card[data-system="guidedStrike"] .sys-icon,
+#screen-loadout .system-card[data-system="coastalMissile"] .sys-icon,
+#screen-loadout .system-card[data-system="counterBattery"] .sys-icon{color:#65a9ff}
+
+#screen-loadout #loadoutSlots{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+  max-height:52vh;overflow-y:auto;padding:2px 2px 8px;
+}
+#screen-loadout .loadout-slot{
+  min-height:66px;position:relative;padding:9px 34px 9px 10px;
+  border:1px dashed #655a31;border-radius:6px;margin:0;
+  background:#11130e;color:#897e52;display:flex;align-items:center;gap:9px;
+}
+#screen-loadout .loadout-slot.filled{
+  border-style:solid;border-color:#75652f;
+  background:linear-gradient(145deg,#222217,#12150f);
+  color:#f0e8c7;cursor:pointer;
+}
+#screen-loadout .loadout-slot.filled>span{
+  width:32px;height:32px;display:grid;place-items:center;border-radius:7px;
+  border:1px solid #75652f;background:#1c1d13;color:#e2c65f;font-size:16px;font-weight:900;
+}
+#screen-loadout .loadout-slot small{margin-left:auto;color:#a69a67;opacity:1}
+
+/* Explicit remove control: no need to remember that clicking the slot removes it. */
+.loadout-remove{
+  position:absolute;right:6px;top:6px;width:22px;height:22px;padding:0;
+  display:grid;place-items:center;border:1px solid #754747;border-radius:4px;
+  background:#291316;color:#ff8888;font-size:12px;font-weight:900;line-height:1;
+}
+.loadout-remove:hover:not(:disabled){background:#4a1a1f;border-color:#ff7070;color:#fff}
+
+#screen-loadout .system-info{
+  border-top:1px solid #4f4425;color:#a79b70;background:#0d100b;
+  padding:12px;border-radius:5px;min-height:82px;
 }
 
-#screen-loadout #arsenalList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  max-height: 48vh;
-  overflow-y: auto;
-  padding-right: 4px;
+@media (min-width:900px){
+  #screen-loadout #arsenalList{grid-template-columns:repeat(2,minmax(0,1fr));max-height:55vh}
+  #screen-loadout #loadoutSlots{grid-template-columns:repeat(2,minmax(0,1fr));max-height:55vh}
 }
-
-#screen-loadout .system-card {
-  min-height: 66px;
-  cursor: pointer;
-}
-
-#screen-loadout #loadoutSlots {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
-#screen-loadout .loadout-slot {
-  min-height: 58px;
-}
-
-#screen-loadout .loadout-slot.filled strong {
-  font-size: 11px;
-  line-height: 1.15;
-}
-
-#screen-loadout .loadout-slot small {
-  opacity: .75;
-}
-
-@media (min-width: 900px) {
-  #screen-loadout #arsenalList {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-height: 55vh;
-  }
-
-  #screen-loadout #loadoutSlots {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  #screen-loadout #arsenalList {
-    grid-template-columns: 1fr;
-    max-height: 42vh;
-  }
-
-  #screen-loadout #loadoutSlots {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+@media (max-width:640px){
+  #screen-loadout #arsenalList{grid-template-columns:1fr;max-height:40vh}
+  #screen-loadout #loadoutSlots{grid-template-columns:repeat(2,minmax(0,1fr));max-height:40vh}
 }
