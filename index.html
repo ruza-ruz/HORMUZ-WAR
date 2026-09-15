@@ -62,12 +62,12 @@ data-action="howto"
                 </button>
 
                 <button
-id="btnDuel"
-class="primary-button"
-data-action="factions"
+id="btnSettings"
+class="menu-button"
+data-action="settings"
 >
-                    SETTINGS
-                </button>
+    SETTINGS
+</button>
 
             </div>
 
@@ -123,11 +123,12 @@ data-action="factions"
                 </div>
 
                 <button
-                    class="primary-button"
-                    data-action="factions"
-                >
-                    PLAY DUEL
-                </button>
+    id="btnDuel"
+    class="primary-button"
+    data-action="factions"
+>
+    PLAY DUEL
+</button>
 
             </article>
 
@@ -334,7 +335,7 @@ data-faction="south"
 
         <div class="screen-title">
             LOADOUT
-            <span>SELECT 6 SYSTEMS</span>
+            <span>SELECT 5 SYSTEMS</span>
         </div>
 
 
@@ -366,7 +367,7 @@ data-faction="south"
                     YOUR LOADOUT
 
                     <span id="slotCount">
-                        0 / 6
+                        0 / 5
                     </span>
 
                 </div>
@@ -529,7 +530,7 @@ data-faction="south"
 
             <!-- TARGET STATUS -->
 
-            <aside class="target-panel">
+            <aside id="targetPanel" class="target-panel">
 
                 <div class="panel-title">
                     TARGET / UNIT STATUS
@@ -577,9 +578,9 @@ data-faction="south"
 
                         ANGLE
 
-                        <output id="angleOut">
-                            45°
-                        </output>
+<output id="angleValue">
+    45°
+</output>
 
                         <input
                             id="angle"
@@ -596,9 +597,9 @@ data-faction="south"
 
                         POWER
 
-                        <output id="powerOut">
-                            70%
-                        </output>
+<output id="powerValue">
+    70%
+</output>
 
                         <input
                             id="power"
@@ -612,20 +613,20 @@ data-faction="south"
 
 
                     <button
-                        id="fireBtn"
-                        class="fire-button"
-                        disabled
-                    >
-                        FIRE
-                    </button>
+    id="fireButton"
+    class="fire-button"
+    disabled
+>
+    FIRE
+</button>
 
 
                     <button
-                        id="endTurnBtn"
-                        class="end-turn-button"
-                    >
-                        END TURN
-                    </button>
+    id="endTurnButton"
+    class="end-turn-button"
+>
+    END TURN
+</button>
 
                 </div>
 
