@@ -61,7 +61,6 @@
   };
 
   const targetless=new Set(["shield","repair","interceptor","rapidDefense","pointDefense","smokeScreen","recon","decoyDrone","sonarSweep","sensorDrone","stealthDrone"]);
-
   function refreshFire(){
     const btn=$("fireButton");
     if(!btn) return;
@@ -71,25 +70,18 @@
     btn.disabled=!ok;
     btn.title=ok?"Launch selected system":"Select your unit, system, and target";
   }
-
   const oldRenderGame=window.renderGame;
-  window.renderGame=function(){
-    if(typeof oldRenderGame==="function") oldRenderGame();
-    refreshFire();
-  };
-
-  /* Also refresh when the player clicks a unit/target or changes selection. */
+  window.renderGame=function(){if(typeof oldRenderGame==="function") oldRenderGame();refreshFire();};
   const oldSelectUnit=window.selectUnit;
-  window.selectUnit=function(id){
-    const r=oldSelectUnit(id); refreshFire(); return r;
-  };
+  window.selectUnit=function(id){const r=oldSelectUnit(id);refreshFire();return r;};
   const oldSelectSystem=window.selectSystem;
-  window.selectSystem=function(id){
-    const r=oldSelectSystem(id); refreshFire(); return r;
-  };
+  window.selectSystem=function(id){const r=oldSelectSystem(id);refreshFire();return r;};
   const oldSelectTarget=window.selectTarget;
-  window.selectTarget=function(id){
-    const r=oldSelectTarget(id); refreshFire(); return r;
-  };
+  window.selectTarget=function(id){const r=oldSelectTarget(id);refreshFire();return r;};
   document.addEventListener("DOMContentLoaded",()=>setTimeout(refreshFire,50));
+
+  /* Mobile layout hotfix is injected here so it works without another HTML edit. */
+  const mobile=document.createElement("style");
+  mobile.textContent=`@media(max-width:800px){html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}#screen-game.game-screen{height:auto!important;min-height:100vh!important;max-height:none!important;overflow-x:hidden!important;overflow-y:visible!important;display:block!important;padding-bottom:28px!important}#screen-game .game-area{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:grid!important;grid-template-columns:1fr!important;grid-template-rows:420px auto auto!important;flex:none!important}#screen-game .battlefield{height:420px!important;min-height:420px!important}#screen-game .target-panel{min-height:135px!important;max-height:none!important;overflow:visible!important}#screen-game .control-panel{height:auto!important;min-height:250px!important;max-height:none!important;overflow:visible!important;display:block!important}#screen-game .battle-loadout{height:188px!important;min-height:188px!important;overflow:visible!important;display:grid!important;grid-template-columns:repeat(5,minmax(55px,1fr))!important;grid-template-rows:repeat(2,92px)!important}#screen-game .battle-slot{height:92px!important;min-height:92px!important}#screen-game .aim-controls{height:auto!important;min-height:110px!important;overflow:visible!important;display:grid!important;grid-template-columns:1fr 1fr!important;grid-auto-rows:52px!important}#screen-game .aim-controls .fire-button{grid-column:1/-1!important;height:52px!important}#screen-game .aim-controls .move-button,#screen-game .aim-controls .end-turn-button{height:52px!important}}`;
+  document.head.appendChild(mobile);
 })();
