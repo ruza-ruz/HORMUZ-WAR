@@ -1,0 +1,8 @@
+/* HORMUZ WAR — movement controls */
+.move-button{background:#101e23;border-color:#46636b;color:#dce8ea;font-weight:800;letter-spacing:1px}
+.move-button:hover:not(:disabled){border-color:#d1b75c;box-shadow:0 0 18px #d1b75c22}
+.move-button.active{background:#493e18;border-color:#d1b75c;color:#ffe89a;box-shadow:0 0 18px #d1b75c33}
+.move-range-ring{position:absolute;z-index:12;transform:translate(-50%,-50%);border:1px dashed #e2c95c88;border-radius:50%;background:radial-gradient(circle,#e2c95c08 0%,transparent 68%);pointer-events:none;box-shadow:0 0 25px #e2c95c14,inset 0 0 20px #e2c95c0b;animation:movePulse 1.2s ease-in-out infinite}
+.move-range-ring:after{content:"MOVE RANGE";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:7px;letter-spacing:2px;color:#d9c66c88;white-space:nowrap}
+@keyframes movePulse{0%,100%{opacity:.55}50%{opacity:1}}
+@media(max-width:800px){.move-range-ring:after{font-size:6px}.move-button{padding:10px 12px}}
