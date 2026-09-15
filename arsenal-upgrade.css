@@ -1,0 +1,64 @@
+/* HORMUZ WAR — expanded arsenal / 10-system loadout */
+
+#screen-loadout .loadout-container {
+  align-items: stretch;
+}
+
+#screen-loadout .loadout-panel {
+  min-width: 0;
+}
+
+#screen-loadout #arsenalList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 48vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+#screen-loadout .system-card {
+  min-height: 66px;
+  cursor: pointer;
+}
+
+#screen-loadout #loadoutSlots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+#screen-loadout .loadout-slot {
+  min-height: 58px;
+}
+
+#screen-loadout .loadout-slot.filled strong {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+#screen-loadout .loadout-slot small {
+  opacity: .75;
+}
+
+@media (min-width: 900px) {
+  #screen-loadout #arsenalList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 55vh;
+  }
+
+  #screen-loadout #loadoutSlots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  #screen-loadout #arsenalList {
+    grid-template-columns: 1fr;
+    max-height: 42vh;
+  }
+
+  #screen-loadout #loadoutSlots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
