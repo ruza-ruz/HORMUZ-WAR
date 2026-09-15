@@ -23,10 +23,13 @@
     const fire=document.getElementById('fireButton');
     if(fire && typeof state!=='undefined'){
       const system=document.querySelector('#battleLoadout .battle-slot.selected');
+      const id=state.selectedSystem;
+      const targetless=new Set(['repair','shield','interceptor','rapidDefense','pointDefense','smokeScreen','recon','decoyDrone','sonarSweep','sensorDrone','stealthDrone']);
       const hasTarget=!!state.target && state.target.hp>0 && state.target.side!==state.playerSide;
       const hasUnit=!!state.selectedUnit && state.selectedUnit.side===state.playerSide && state.selectedUnit.hp>0;
       const usable=state.phase==='PLANNING' && !state.turnSpent;
-      fire.disabled=!(system && hasTarget && hasUnit && usable);
+      const targetOK=targetless.has(id) ? true : hasTarget;
+      fire.disabled=!(system && hasUnit && usable && targetOK);
     }
   }
 
