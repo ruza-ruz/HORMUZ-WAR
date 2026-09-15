@@ -1,0 +1,69 @@
+/* =========================================================
+   HORMUZ WAR — COUNTER / INTERCEPTION UI
+========================================================= */
+.counter-status {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(127,147,153,.28);
+  background: rgba(4,9,13,.72);
+  color: #7f9399;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.counter-status.armed {
+  border-color: rgba(255,178,61,.65);
+  color: #ffb23d;
+  box-shadow: 0 0 16px rgba(255,178,61,.10);
+  animation: counterPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes counterPulse {
+  0%,100% { opacity: .72; }
+  50% { opacity: 1; }
+}
+
+.incoming-projectile {
+  width: 9px !important;
+  height: 9px !important;
+  background: #ffb23d !important;
+  box-shadow: 0 0 8px #ffb23d, 0 0 18px rgba(255,178,61,.65);
+}
+
+.intercepted-projectile {
+  animation: interceptBurst .18s ease-out forwards;
+}
+
+@keyframes interceptBurst {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(3.8); opacity: 0; }
+}
+
+.intercept-effect {
+  position: absolute;
+  z-index: 90;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-weight: 900;
+  font-size: clamp(10px, 1.1vw, 14px);
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 10px #000;
+  animation: interceptText 1s ease-out forwards;
+}
+
+.intercept-success { color: #7dffb2; }
+.intercept-fail { color: #ffb23d; }
+
+@keyframes interceptText {
+  0% { opacity: 0; transform: translate(-50%, -20%) scale(.8); }
+  18% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -100%) scale(1.05); }
+}
+
+@media (max-width: 760px) {
+  .counter-status {
+    font-size: 8px;
+    padding: 7px 8px;
+  }
+}
