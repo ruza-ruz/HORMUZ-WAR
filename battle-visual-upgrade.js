@@ -1,87 +1,27 @@
 /* HORMUZ WAR — large weapon icons, detailed unit art, and FIRE state */
 (function(){
-  const weaponIcons = {
-    basicMissile:"🚀", recon:"📡", interceptor:"🛡️", heavyMissile:"🚀",
-    fastBoat:"🚤", precision:"🎯", longRange:"🚀", rapidDefense:"🛡️",
-    shockwave:"💥", shield:"🛡️", jammer:"📶", repair:"🔧",
-    decoyDrone:"🛸", clusterMissile:"🚀", seaMine:"⚓", smokeScreen:"☁️",
-    sonarSweep:"〰️", empPulse:"⚡", saturationMissile:"🚀", stealthDrone:"🛸",
-    barrageRocket:"🚀", counterJammer:"📶", ramBoat:"🚤", guidedStrike:"🎯",
-    coastalMissile:"🚀", pointDefense:"🛡️", sensorDrone:"📡", counterBattery:"🎯"
-  };
-
-  function iconFor(id){ return weaponIcons[id] || (SYSTEMS[id] && SYSTEMS[id].icon) || "◆"; }
+  const weaponIcons={basicMissile:"🚀",recon:"📡",interceptor:"🛡️",heavyMissile:"🚀",fastBoat:"🚤",precision:"🎯",longRange:"🚀",rapidDefense:"🛡️",shockwave:"💥",shield:"🛡️",jammer:"📶",repair:"🔧",decoyDrone:"🛸",clusterMissile:"🚀",seaMine:"⚓",smokeScreen:"☁️",sonarSweep:"〰️",empPulse:"⚡",saturationMissile:"🚀",stealthDrone:"🛸",barrageRocket:"🚀",counterJammer:"📶",ramBoat:"🚤",guidedStrike:"🎯",coastalMissile:"🚀",pointDefense:"🛡️",sensorDrone:"📡",counterBattery:"🎯"};
+  function iconFor(id){return weaponIcons[id]||(SYSTEMS[id]&&SYSTEMS[id].icon)||"◆";}
 
   function unitArt(unit){
-    const c = unit.side === "northern" ? "#e85d66" : "#62a8ee";
-    const d = unit.side === "northern" ? "#531d24" : "#163b61";
-    const glow = unit.side === "northern" ? "#ff4f5a" : "#4aa6ff";
-    const common = `fill="${d}" stroke="${c}" stroke-width="3" stroke-linejoin="round"`;
-    if(unit.type === "ship") return `<svg viewBox="0 0 180 100" aria-hidden="true"><defs><linearGradient id="h${unit.id}" x1="0" x2="0" y1="0" y2="1"><stop stop-color="${c}"/><stop offset="1" stop-color="${d}"/></linearGradient></defs><ellipse cx="90" cy="89" rx="75" ry="5" fill="${glow}" opacity=".35"/><path d="M12 58 L35 58 L43 42 L128 42 L143 56 L166 58 L149 79 L32 79 Z" fill="url(#h${unit.id})" stroke="${c}" stroke-width="3"/><rect x="55" y="28" width="52" height="16" rx="3" ${common}/><rect x="70" y="18" width="24" height="10" rx="2" ${common}/><path d="M82 18 L82 8 L90 8 L96 18" fill="none" stroke="${c}" stroke-width="3"/><path d="M108 35 L153 27" stroke="#dbe9ed" stroke-width="4" stroke-linecap="round"/><circle cx="41" cy="65" r="4" fill="#f5d36b"/><circle cx="134" cy="65" r="4" fill="#f5d36b"/></svg>`;
-    if(unit.type === "boat") return `<svg viewBox="0 0 180 100" aria-hidden="true"><ellipse cx="90" cy="88" rx="62" ry="5" fill="${glow}" opacity=".4"/><path d="M18 57 L44 57 L59 34 L120 34 L137 57 L164 58 L145 76 L39 76 Z" ${common}/><path d="M63 34 L76 20 L106 20 L120 34 Z" fill="${c}" opacity=".8" stroke="${c}" stroke-width="3"/><rect x="80" y="13" width="5" height="16" fill="#cbd9dd"/><path d="M84 14 L108 20" stroke="#cbd9dd" stroke-width="3"/><path d="M126 45 L157 39" stroke="#dbe9ed" stroke-width="4" stroke-linecap="round"/><circle cx="49" cy="61" r="4" fill="#f5d36b"/></svg>`;
-    if(unit.type === "radar") return `<svg viewBox="0 0 180 100" aria-hidden="true"><ellipse cx="90" cy="88" rx="48" ry="5" fill="${glow}" opacity=".3"/><path d="M54 82 L126 82 L116 55 L64 55 Z" ${common}/><rect x="81" y="38" width="18" height="19" ${common}/><circle cx="90" cy="32" r="24" fill="${d}" stroke="#77e5ea" stroke-width="3"/><path d="M90 32 L108 17" stroke="#77e5ea" stroke-width="4" stroke-linecap="round"/><path d="M90 32 L74 45" stroke="#77e5ea" stroke-width="2" opacity=".55"/><path d="M57 32 Q90 0 123 32" fill="none" stroke="#77e5ea" stroke-width="2" opacity=".45"/></svg>`;
-    return `<svg viewBox="0 0 180 100" aria-hidden="true"><ellipse cx="90" cy="88" rx="55" ry="5" fill="${glow}" opacity=".3"/><rect x="45" y="60" width="90" height="22" rx="4" ${common}/><path d="M65 60 L73 43 L107 43 L115 60 Z" fill="${c}" opacity=".8" stroke="${c}" stroke-width="3"/><circle cx="90" cy="44" r="15" fill="${d}" stroke="#f2cf69" stroke-width="3"/><path d="M90 44 L122 30" stroke="#f2cf69" stroke-width="5" stroke-linecap="round"/><path d="M42 70 L22 60 M138 70 L158 60" stroke="#a9bdc2" stroke-width="4"/><circle cx="52" cy="72" r="3" fill="#f5d36b"/><circle cx="128" cy="72" r="3" fill="#f5d36b"/></svg>`;
+    const red=unit.side==="northern", c=red?"#e45761":"#5ca9ee", dark=red?"#35151a":"#102b45", hi=red?"#ff8187":"#86c8ff";
+    const id=String(unit.id).replace(/[^a-z0-9]/gi,"");
+    if(unit.type==="ship") return `<svg viewBox="0 0 240 120" aria-hidden="true"><defs><linearGradient id="h${id}" x2="0" y2="1"><stop stop-color="${hi}"/><stop offset=".35" stop-color="${c}"/><stop offset="1" stop-color="${dark}"/></linearGradient><linearGradient id="d${id}" x2="1" y2="1"><stop stop-color="#61757a"/><stop offset="1" stop-color="#182428"/></linearGradient></defs><ellipse cx="116" cy="105" rx="104" ry="7" fill="#74d7e033"/><path d="M8 68 Q23 60 43 61 L57 42 L170 42 L190 57 L228 66 L203 91 L35 91 Q20 84 8 68Z" fill="url(#h${id})" stroke="${hi}" stroke-width="3"/><path d="M39 76 L198 76" stroke="#d7e5e6" stroke-opacity=".35" stroke-width="2"/><path d="M55 44 L77 27 L148 27 L170 43Z" fill="url(#d${id})" stroke="#a9babd" stroke-width="3"/><rect x="78" y="18" width="46" height="12" rx="3" fill="#26383c" stroke="${hi}" stroke-width="2"/><rect x="94" y="8" width="20" height="11" rx="2" fill="#172427" stroke="#a9babd" stroke-width="2"/><path d="M104 8V1 M104 3L128 10 M104 4L91 10" stroke="#c9d7d9" stroke-width="2"/><path d="M128 27L177 15" stroke="#d8e4e5" stroke-width="5" stroke-linecap="round"/><path d="M177 15l13-3" stroke="#d8e4e5" stroke-width="3" stroke-linecap="round"/><path d="M66 44v-12h9v12M153 43v-13h8v13" fill="#24363a" stroke="#a9babd" stroke-width="2"/><circle cx="30" cy="69" r="4" fill="#ffe07a"/><circle cx="205" cy="67" r="4" fill="#ffe07a"/><path d="M18 92 Q80 111 211 93" fill="none" stroke="#c8f1f244" stroke-width="3"/></svg>`;
+    if(unit.type==="boat") return `<svg viewBox="0 0 240 120" aria-hidden="true"><defs><linearGradient id="b${id}" x2="0" y2="1"><stop stop-color="${hi}"/><stop offset=".45" stop-color="${c}"/><stop offset="1" stop-color="${dark}"/></linearGradient></defs><ellipse cx="120" cy="104" rx="82" ry="6" fill="#6bd5e055"/><path d="M18 69 L55 68 L73 45 L157 45 L176 65 L224 69 L198 91 L48 91Z" fill="url(#b${id})" stroke="${hi}" stroke-width="3"/><path d="M70 45 L91 24 L145 24 L164 45Z" fill="#263c43" stroke="#b8c8ca" stroke-width="3"/><path d="M91 24L103 14H132L145 24" fill="#3f555a" stroke="${hi}" stroke-width="2"/><path d="M119 14V2 M119 4L147 13" stroke="#c9d7d9" stroke-width="3"/><path d="M151 48L199 37" stroke="#d9e5e7" stroke-width="5" stroke-linecap="round"/><path d="M44 79L194 79" stroke="#d9e5e733" stroke-width="3"/><circle cx="55" cy="70" r="4" fill="#ffe07a"/><path d="M198 90L219 101 M179 91L201 104" stroke="#bfeff155" stroke-width="4"/></svg>`;
+    if(unit.type==="radar") return `<svg viewBox="0 0 240 120" aria-hidden="true"><ellipse cx="120" cy="104" rx="58" ry="6" fill="#6bd5e033"/><path d="M67 96H173L158 59H82Z" fill="${dark}" stroke="${hi}" stroke-width="3"/><rect x="102" y="43" width="36" height="20" rx="3" fill="#23383d" stroke="#9fb4b8" stroke-width="2"/><circle cx="120" cy="34" r="30" fill="#14272e" stroke="#78e3e8" stroke-width="4"/><path d="M120 34L145 12" stroke="#9af0f2" stroke-width="5" stroke-linecap="round"/><path d="M120 34L92 49M120 34L120 5" stroke="#78e3e877" stroke-width="2"/><path d="M83 34Q120 0 157 34" fill="none" stroke="#78e3e855" stroke-width="3"/><rect x="88" y="72" width="64" height="9" rx="3" fill="#51676b"/><circle cx="77" cy="91" r="4" fill="#ffe07a"/><circle cx="163" cy="91" r="4" fill="#ffe07a"/></svg>`;
+    return `<svg viewBox="0 0 240 120" aria-hidden="true"><defs><linearGradient id="p${id}" x2="0" y2="1"><stop stop-color="#566b70"/><stop offset="1" stop-color="${dark}"/></linearGradient></defs><ellipse cx="120" cy="105" rx="72" ry="6" fill="#6bd5e033"/><path d="M44 91L54 58H186L196 91Z" fill="url(#p${id})" stroke="${hi}" stroke-width="3"/><path d="M68 58L80 38H160L172 58Z" fill="#263b40" stroke="#a9babd" stroke-width="2"/><circle cx="120" cy="38" r="17" fill="#18292d" stroke="#f0ce68" stroke-width="3"/><path d="M120 38L157 20" stroke="#f0ce68" stroke-width="6" stroke-linecap="round"/><path d="M62 69H178M62 80H178" stroke="#b8c8ca33" stroke-width="3"/><rect x="79" y="48" width="13" height="10" rx="2" fill="#d85a61"/><rect x="148" y="48" width="13" height="10" rx="2" fill="#5da9ec"/><circle cx="61" cy="87" r="4" fill="#ffe07a"/><circle cx="179" cy="87" r="4" fill="#ffe07a"/></svg>`;
   }
 
-  window.renderUnits = function(){
-    const layer = $("unitsLayer");
-    if(!layer) return;
-    layer.innerHTML = "";
-    state.units.forEach(unit=>{
-      const el=document.createElement("div");
-      el.className=`unit ${unit.type} ${unit.side}${unit.hp<=0?" destroyed":""}`;
-      el.style.left=`${unit.x}%`;
-      el.style.top=`${unit.y}%`;
-      if(state.selectedUnit && state.selectedUnit.id===unit.id) el.classList.add("selected");
-      const hp=Math.max(0,Math.min(100,(unit.hp/unit.maxHp)*100));
-      el.innerHTML=`<div class="hpbar"><i style="width:${hp}%"></i></div><div class="body">${unitArt(unit)}</div><div class="unit-label">${unit.name}</div>`;
-      el.onclick=e=>{e.stopPropagation();selectUnit(unit.id);};
-      layer.appendChild(el);
-    });
-  };
+  window.renderUnits=function(){const layer=$("unitsLayer");if(!layer)return;layer.innerHTML="";state.units.forEach(unit=>{const el=document.createElement("div");el.className=`unit ${unit.type} ${unit.side}${unit.hp<=0?" destroyed":""}`;el.style.left=`${unit.x}%`;el.style.top=`${unit.y}%`;if(state.selectedUnit&&state.selectedUnit.id===unit.id)el.classList.add("selected");const hp=Math.max(0,Math.min(100,(unit.hp/unit.maxHp)*100));el.innerHTML=`<div class="hpbar"><i style="width:${hp}%"></i></div><div class="body">${unitArt(unit)}</div><div class="unit-label">${unit.name}</div>`;el.onclick=e=>{e.stopPropagation();selectUnit(unit.id)};layer.appendChild(el)})};
 
-  window.renderBattleLoadout = function(){
-    const container=$("battleLoadout");
-    if(!container) return;
-    container.innerHTML="";
-    state.loadout.forEach(systemId=>{
-      const system=SYSTEMS[systemId];
-      if(!system) return;
-      const uses=usesLeft(systemId);
-      const slot=document.createElement("button");
-      slot.type="button";
-      slot.className="battle-slot";
-      if(state.selectedSystem===systemId) slot.classList.add("selected");
-      if(uses<=0) { slot.classList.add("used"); slot.disabled=true; }
-      slot.dataset.system=systemId;
-      slot.innerHTML=`<span class="weapon-icon">${iconFor(systemId)}</span><span class="weapon-name">${system.name}</span><span class="weapon-role">${system.role}</span><span class="weapon-ammo">AMMO ${uses}</span>`;
-      slot.onclick=()=>selectSystem(systemId);
-      container.appendChild(slot);
-    });
-  };
+  window.renderBattleLoadout=function(){const container=$("battleLoadout");if(!container)return;container.innerHTML="";state.loadout.forEach(systemId=>{const system=SYSTEMS[systemId];if(!system)return;const uses=usesLeft(systemId),slot=document.createElement("button");slot.type="button";slot.className="battle-slot";if(state.selectedSystem===systemId)slot.classList.add("selected");if(uses<=0){slot.classList.add("used");slot.disabled=true}slot.dataset.system=systemId;slot.innerHTML=`<span class="weapon-icon">${iconFor(systemId)}</span><span class="weapon-name">${system.name}</span><span class="weapon-role">${system.role}</span><span class="weapon-ammo">AMMO ${uses}</span>`;slot.onclick=()=>selectSystem(systemId);container.appendChild(slot)})};
 
   const targetless=new Set(["shield","repair","interceptor","rapidDefense","pointDefense","smokeScreen","recon","decoyDrone","sonarSweep","sensorDrone","stealthDrone"]);
-  function refreshFire(){
-    const btn=$("fireButton");
-    if(!btn) return;
-    const system=state.selectedSystem ? SYSTEMS[state.selectedSystem] : null;
-    let ok=state.phase==="PLANNING" && !state.turnSpent && !!state.selectedUnit && state.selectedUnit.side===state.playerSide && !!system && usesLeft(state.selectedSystem)>0;
-    if(ok && !targetless.has(state.selectedSystem)) ok=!!state.target && state.target.hp>0 && state.target.side!==state.playerSide;
-    btn.disabled=!ok;
-    btn.title=ok?"Launch selected system":"Select your unit, system, and target";
-  }
-  const oldRenderGame=window.renderGame;
-  window.renderGame=function(){if(typeof oldRenderGame==="function") oldRenderGame();refreshFire();};
-  const oldSelectUnit=window.selectUnit;
-  window.selectUnit=function(id){const r=oldSelectUnit(id);refreshFire();return r;};
-  const oldSelectSystem=window.selectSystem;
-  window.selectSystem=function(id){const r=oldSelectSystem(id);refreshFire();return r;};
-  const oldSelectTarget=window.selectTarget;
-  window.selectTarget=function(id){const r=oldSelectTarget(id);refreshFire();return r;};
+  function refreshFire(){const btn=$("fireButton");if(!btn)return;const system=state.selectedSystem?SYSTEMS[state.selectedSystem]:null;let ok=state.phase==="PLANNING"&&!state.turnSpent&&!!state.selectedUnit&&state.selectedUnit.side===state.playerSide&&!!system&&usesLeft(state.selectedSystem)>0;if(ok&&!targetless.has(state.selectedSystem))ok=!!state.target&&state.target.hp>0&&state.target.side!==state.playerSide;btn.disabled=!ok;btn.title=ok?"Launch selected system":"Select your unit, system, and target"}
+  const oldRenderGame=window.renderGame;window.renderGame=function(){if(typeof oldRenderGame==="function")oldRenderGame();refreshFire()};
+  const oldSelectUnit=window.selectUnit;window.selectUnit=function(id){const r=oldSelectUnit(id);refreshFire();return r};
+  const oldSelectSystem=window.selectSystem;window.selectSystem=function(id){const r=oldSelectSystem(id);refreshFire();return r};
+  const oldSelectTarget=window.selectTarget;window.selectTarget=function(id){const r=oldSelectTarget(id);refreshFire();return r};
   document.addEventListener("DOMContentLoaded",()=>setTimeout(refreshFire,50));
-
-  /* Mobile layout hotfix is injected here so it works without another HTML edit. */
-  const mobile=document.createElement("style");
-  mobile.textContent=`@media(max-width:800px){html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}#screen-game.game-screen{height:auto!important;min-height:100vh!important;max-height:none!important;overflow-x:hidden!important;overflow-y:visible!important;display:block!important;padding-bottom:28px!important}#screen-game .game-area{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:grid!important;grid-template-columns:1fr!important;grid-template-rows:420px auto auto!important;flex:none!important}#screen-game .battlefield{height:420px!important;min-height:420px!important}#screen-game .target-panel{min-height:135px!important;max-height:none!important;overflow:visible!important}#screen-game .control-panel{height:auto!important;min-height:250px!important;max-height:none!important;overflow:visible!important;display:block!important}#screen-game .battle-loadout{height:188px!important;min-height:188px!important;overflow:visible!important;display:grid!important;grid-template-columns:repeat(5,minmax(55px,1fr))!important;grid-template-rows:repeat(2,92px)!important}#screen-game .battle-slot{height:92px!important;min-height:92px!important}#screen-game .aim-controls{height:auto!important;min-height:110px!important;overflow:visible!important;display:grid!important;grid-template-columns:1fr 1fr!important;grid-auto-rows:52px!important}#screen-game .aim-controls .fire-button{grid-column:1/-1!important;height:52px!important}#screen-game .aim-controls .move-button,#screen-game .aim-controls .end-turn-button{height:52px!important}}`;
-  document.head.appendChild(mobile);
+  const mobile=document.createElement("style");mobile.textContent=`@media(max-width:800px){html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}#screen-game.game-screen{height:auto!important;min-height:100vh!important;max-height:none!important;overflow-x:hidden!important;overflow-y:visible!important;display:block!important;padding-bottom:28px!important}#screen-game .game-area{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:grid!important;grid-template-columns:1fr!important;grid-template-rows:420px auto auto!important;flex:none!important}#screen-game .battlefield{height:420px!important;min-height:420px!important}#screen-game .target-panel{min-height:135px!important;max-height:none!important;overflow:visible!important}#screen-game .control-panel{height:auto!important;min-height:250px!important;max-height:none!important;overflow:visible!important;display:block!important}#screen-game .battle-loadout{height:188px!important;min-height:188px!important;overflow:visible!important;display:grid!important;grid-template-columns:repeat(5,minmax(55px,1fr))!important;grid-template-rows:repeat(2,92px)!important}#screen-game .battle-slot{height:92px!important;min-height:92px!important}#screen-game .aim-controls{height:auto!important;min-height:110px!important;overflow:visible!important;display:grid!important;grid-template-columns:1fr 1fr!important;grid-auto-rows:52px!important}#screen-game .aim-controls .fire-button{grid-column:1/-1!important;height:52px!important}#screen-game .aim-controls .move-button,#screen-game .aim-controls .end-turn-button{height:52px!important}}`;document.head.appendChild(mobile);
 })();
