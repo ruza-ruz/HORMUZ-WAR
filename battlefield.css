@@ -1,5 +1,5 @@
-/* HORMUZ WAR v0.3 — Battlefield visual layer */
-.battlefield{isolation:isolate;background:#06151b!important;perspective:900px}
+/* HORMUZ WAR v0.7 — Battlefield visual and layout stabilization */
+.battlefield{isolation:isolate;background:#06151b!important;perspective:900px;min-height:320px;height:100%;width:100%}
 .battlefield .sky{background:linear-gradient(180deg,#071017 0%,#102b34 58%,#173b43 100%)!important}
 .battlefield .sea{background:linear-gradient(180deg,#0a3b45 0%,#062731 48%,#041820 100%)!important;overflow:hidden}
 .battlefield .sea:before,.battlefield .sea:after{content:"";position:absolute;left:-10%;width:120%;height:32px;border-top:1px solid #77c3ce33;border-radius:50%;transform:rotate(-2deg);animation:seaDrift 9s linear infinite}
@@ -16,8 +16,7 @@
 .distant-fleet span{position:absolute;bottom:5px;width:68px;height:9px;background:#061014;border-radius:2px 7px 3px 4px;box-shadow:0 4px 0 #020607}
 .distant-fleet span:before{content:"";position:absolute;left:25px;bottom:8px;width:18px;height:12px;background:#08171b;clip-path:polygon(0 100%,18% 20%,55% 20%,70% 0,100% 100%)}
 .distant-fleet span:nth-child(2){transform:scale(.55);right:0;bottom:8px}
-.fleet-north{left:19%;top:40%;transform:scale(.7);opacity:.35}
-.fleet-south{right:20%;top:42%;transform:scale(.55);opacity:.32}
+.fleet-north{left:19%;top:40%;transform:scale(.7);opacity:.35}.fleet-south{right:20%;top:42%;transform:scale(.55);opacity:.32}
 .fleet-north span{background:#160b0d}.fleet-south span{background:#071323}
 .sea-foam{position:absolute;z-index:4;width:150px;height:18px;border-top:2px solid #b9e1df22;border-radius:50%;filter:blur(.5px)}
 .foam-a{left:18%;bottom:23%;transform:rotate(-4deg)}.foam-b{right:15%;bottom:28%;transform:rotate(3deg)}
@@ -26,23 +25,34 @@
 .defense-a{left:9%}.defense-b{right:11%}
 .battle-scan{position:absolute;inset:0;z-index:40;pointer-events:none;background:linear-gradient(90deg,transparent 0%,#8fcad20a 48%,transparent 52%);mix-blend-mode:screen;animation:scanSweep 7s ease-in-out infinite}
 @keyframes scanSweep{0%,100%{transform:translateX(-35%);opacity:.2}50%{transform:translateX(35%);opacity:.5}}
-/* Generic upgrade for the dynamically-created unit nodes, without changing game logic. */
+
+/* Make the game screen and its battlefield consume the actual viewport. */
+#screen-game.game-screen{height:100vh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding:0!important}
+#screen-game .game-area{flex:1 1 auto!important;height:auto!important;min-height:0!important;display:grid!important}
+#screen-game .battlefield{min-height:0!important}
+
 #unitsLayer{position:absolute;inset:0;z-index:15;pointer-events:none}
-#unitsLayer>div{position:absolute;z-index:2;width:76px!important;height:40px!important;min-width:76px;border-radius:8px!important;border:1px solid #7f969b!important;background:linear-gradient(180deg,#34474b,#101b1e)!important;box-shadow:0 10px 18px #000b,0 0 0 1px #0008,inset 0 2px 0 #ffffff14!important;color:transparent!important;font-size:0!important;filter:drop-shadow(0 5px 5px #0009);transform-origin:center bottom}
+#unitsLayer>div{position:absolute;z-index:2;width:76px!important;height:42px!important;min-width:76px;border-radius:8px!important;border:1px solid #7f969b!important;background:linear-gradient(180deg,#34474b,#101b1e)!important;box-shadow:0 10px 18px #000b,0 0 0 1px #0008,inset 0 2px 0 #ffffff14!important;color:transparent!important;font-size:0!important;filter:drop-shadow(0 5px 5px #0009);transform:translate(-50%,-50%);transform-origin:center bottom;pointer-events:auto;cursor:pointer}
 #unitsLayer>div:before{content:"";position:absolute;left:8px;right:8px;bottom:5px;height:9px;background:#071012;border-radius:2px 7px 3px 3px;box-shadow:inset 0 2px #63777a55}
 #unitsLayer>div:after{content:"";position:absolute;left:31px;top:-12px;width:25px;height:18px;background:#26373a;border:1px solid #6b7d7f;clip-path:polygon(0 100%,12% 35%,48% 35%,58% 0,100% 100%);box-shadow:10px 7px 0 -7px #9aaeb055}
-#unitsLayer>div:nth-child(-n+4){border-color:#a8494d!important;background:linear-gradient(180deg,#573034,#171517)!important}
-#unitsLayer>div:nth-child(n+5){border-color:#4d7fb4!important;background:linear-gradient(180deg,#304d68,#101a23)!important}
+#unitsLayer>div:nth-child(-n+4){border-color:#d24d54!important;background:linear-gradient(180deg,#633238,#171517)!important}
+#unitsLayer>div:nth-child(n+5){border-color:#4e8bd0!important;background:linear-gradient(180deg,#315679,#101a23)!important}
 #unitsLayer>div:nth-child(2):before,#unitsLayer>div:nth-child(6):before{left:12px;right:12px;height:6px;border-radius:50%}
 #unitsLayer>div:nth-child(2):after,#unitsLayer>div:nth-child(6):after{left:24px;width:34px;height:13px;clip-path:polygon(0 100%,35% 15%,60% 15%,100% 100%)}
 #unitsLayer>div:nth-child(3):before,#unitsLayer>div:nth-child(7):before{left:19px;right:19px;height:15px;border-radius:3px}
 #unitsLayer>div:nth-child(3):after,#unitsLayer>div:nth-child(7):after{left:34px;width:18px;height:22px;top:-15px;clip-path:polygon(20% 100%,30% 25%,70% 25%,80% 100%)}
 #unitsLayer>div:nth-child(4):before,#unitsLayer>div:nth-child(8):before{left:4px;right:4px;height:12px;transform:skewX(-10deg)}
 #unitsLayer>div:nth-child(4):after,#unitsLayer>div:nth-child(8):after{left:28px;width:32px;height:14px}
-#unitsLayer>div:hover{filter:drop-shadow(0 0 9px #d8e5e7aa) drop-shadow(0 6px 7px #000b)}
-/* Keep selection feedback readable over the new silhouettes. */
+
+/* Dedicated type emblems inside each platform. */
+#unitsLayer>div.ship .body:before{content:"⚓";position:absolute;left:50%;top:7px;transform:translateX(-50%);font-size:17px;color:#e5eef0;opacity:.85}
+#unitsLayer>div.boat .body:before{content:"➤";position:absolute;left:50%;top:6px;transform:translateX(-50%);font-size:20px;color:#e5eef0;opacity:.9}
+#unitsLayer>div.radar .body:before{content:"◉";position:absolute;left:50%;top:5px;transform:translateX(-50%);font-size:19px;color:#72d8df;opacity:.9}
+#unitsLayer>div.defense .body:before{content:"⌾";position:absolute;left:50%;top:5px;transform:translateX(-50%);font-size:20px;color:#ffd36a;opacity:.9}
+#unitsLayer .body{position:absolute;inset:0;pointer-events:none}
+#unitsLayer .hpbar{position:absolute;left:7px;right:7px;top:-8px;height:4px;background:#080d0f;border:1px solid #27363a;z-index:5}
+#unitsLayer .hpbar i{display:block;height:100%;background:#67d58b}
+#unitsLayer .unit-label{position:absolute;top:46px;left:50%;transform:translateX(-50%);white-space:nowrap;color:#e8f0f2!important;font-size:7px!important;font-weight:800;letter-spacing:1px;text-shadow:0 2px 5px #000;z-index:6}
 #unitsLayer>div.selected,#unitsLayer>div.active,#unitsLayer>div.targeted{outline:2px solid #f1cf63;outline-offset:4px;filter:drop-shadow(0 0 10px #f1cf6355) drop-shadow(0 6px 6px #000b)}
-/* Projectiles and combat effects gain depth. */
-#projectiles{z-index:22;position:absolute;inset:0;pointer-events:none}
-#effects{z-index:25;position:absolute;inset:0;pointer-events:none}
-@media(max-width:800px){#unitsLayer>div{width:62px!important;height:34px!important;min-width:62px}.distant-fleet{transform:scale(.55)}.shore-defense{transform:scale(.7)}}
+#projectiles{z-index:22;position:absolute;inset:0;pointer-events:none}#effects{z-index:25;position:absolute;inset:0;pointer-events:none}
+@media(max-width:800px){#unitsLayer>div{width:62px!important;height:36px!important;min-width:62px}.distant-fleet{transform:scale(.55)}.shore-defense{transform:scale(.7)}#unitsLayer .unit-label{font-size:6px!important}}
