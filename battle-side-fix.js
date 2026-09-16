@@ -7,27 +7,8 @@
 (function () {
   "use strict";
 
-  const PLAYER_POSITIONS = {
-    "N-SHIP": 14,
-    "N-BOAT": 25,
-    "N-RADAR": 18,
-    "N-DEF": 28,
-    "S-SHIP": 14,
-    "S-BOAT": 25,
-    "S-RADAR": 18,
-    "S-DEF": 28
-  };
-
-  const ENEMY_POSITIONS = {
-    "N-SHIP": 84,
-    "N-BOAT": 73,
-    "N-RADAR": 82,
-    "N-DEF": 72,
-    "S-SHIP": 84,
-    "S-BOAT": 73,
-    "S-RADAR": 82,
-    "S-DEF": 72
-  };
+  const LEFT_POSITIONS = [14, 25, 18, 28];
+  const RIGHT_POSITIONS = [84, 73, 82, 72];
 
   function getPlayerFaction() {
     const selected = document.querySelector("#screen-factions .faction-card.selected");
@@ -42,18 +23,16 @@
     if (!playerFaction) return;
 
     const playerSide = playerFaction === "north" ? "northern" : "southern";
+    const playerUnits = Array.from(layer.querySelectorAll(`:scope > .unit.${playerSide}`));
+    const enemySide = playerSide === "northern" ? "southern" : "northern";
+    const enemyUnits = Array.from(layer.querySelectorAll(`:scope > .unit.${enemySide}`));
 
-    layer.querySelectorAll(":scope > .unit").forEach(unitElement => {
-      const id = unitElement.dataset.unitId;
-      if (!id) return;
+    playerUnits.forEach((unit, index) => {
+      if (LEFT_POSITIONS[index] !== undefined) unit.style.left = `${LEFT_POSITIONS[index]}%`;
+    });
 
-      const isPlayer = unitElement.classList.contains(playerSide);
-      const positions = isPlayer ? PLAYER_POSITIONS : ENEMY_POSITIONS;
-      const x = positions[id];
-
-      if (typeof x === "number") {
-        unitElement.style.left = `${x}%`;
-      }
+    enemyUnits.forEach((unit, index) => {
+      if (RIGHT_POSITIONS[index] !== undefined) unit.style.left = `${RIGHT_POSITIONS[index]}%`;
     });
   }
 
@@ -62,10 +41,8 @@
     if (!layer) return;
 
     positionUnits();
-
-    const observer = new MutationObserver(() => positionUnits());
+    const observer = new MutationObserver(positionUnits);
     observer.observe(layer, { childList: true });
-
     window.addEventListener("resize", positionUnits);
     window.hormuzPositionUnits = positionUnits;
   }
